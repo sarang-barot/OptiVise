@@ -7,7 +7,7 @@ const api = axios.create({
 
 export const register = async ({ username, email, password }) => {
     try {
-        const response = await api.post('https://localhost:3000/api/auth/register', { username, email, password });
+        const response = await api.post('/api/auth/register', { username, email, password });
         return response.data;
     } catch (error) {
         console.log(error);
@@ -15,8 +15,8 @@ export const register = async ({ username, email, password }) => {
 }
 
 export const login = async ({ email, password }) => {
-    try {
-        const response = await api.post('https://localhost:3000/api/auth/login', { email, password });
+    try {        
+        const response = await api.post('/api/auth/login', { email, password });
         return response.data;
     } catch (error) {
         console.log(error);
@@ -25,7 +25,7 @@ export const login = async ({ email, password }) => {
 
 export const logout = async () => {
     try {
-        const response = await api.get('https://localhost:3000/api/auth/logout');
+        const response = await api.get('/api/auth/logout');
         return response.data;
     } catch (error) {
         console.log(error);
@@ -34,7 +34,7 @@ export const logout = async () => {
 
 export const getMe = async () => {
     try {
-        const response = await api.get('https://localhost:3000/api/auth/get-me');
+        const response = await api.get('/api/auth/get-me');
         return response.data;
     } catch (error) {
         console.log(error);
