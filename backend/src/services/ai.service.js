@@ -105,7 +105,6 @@ const interviewReportJsonSchema = {
 };
 
 async function generateInterviewReport({ resume, jobDescription, selfDescription }) {
-
     const prompt = `Generate interview report for the candidate with the following details:
     Resume: ${resume}
     Job Description: ${jobDescription}
