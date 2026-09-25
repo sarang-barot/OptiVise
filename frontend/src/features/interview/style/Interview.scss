@@ -1,0 +1,566 @@
+$pink: #f00863;
+$ink: #0b0e14;
+$panel: #141a22;
+$field: #202637;
+$muted: #8d96aa;
+$line: #29313d;
+$text: #f3f4f7;
+
+.interview-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 245px;
+  align-items: stretch;
+  background: $ink;
+  color: $text;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.interview-sidebar,
+.report-rail {
+  background: #10151c;
+}
+.interview-sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 2rem 1.15rem 1.35rem;
+  border-right: 1px solid $line;
+}
+.report-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 3.2rem 0.55rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.brand-mark {
+  display: grid;
+  width: 1.7rem;
+  height: 1.7rem;
+  place-items: center;
+  border: 2px solid $pink;
+  border-radius: 0.5rem;
+  color: $pink;
+  font-size: 0.95rem;
+}
+.sidebar-label {
+  margin: 0 0 0.85rem 0.55rem;
+  color: #626c7c;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.report-nav {
+  display: grid;
+  gap: 0.35rem;
+}
+.report-nav button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 0.65rem;
+  border: 0;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: $muted;
+  font: inherit;
+  font-size: 0.79rem;
+  text-align: left;
+  cursor: pointer;
+}
+.report-nav button:hover,
+.report-nav button.active {
+  background: rgba($pink, 0.1);
+  color: #f2dbe5;
+}
+.report-nav button.active {
+  border-left: 2px solid $pink;
+  color: $text;
+}
+.interview-icon {
+  display: inline-flex;
+  width: 1.3rem;
+  align-items: center;
+  justify-content: center;
+  color: $pink;
+  font-size: 1rem;
+  font-weight: 800;
+}
+.nav-count {
+  margin-left: auto;
+  color: #747d8e;
+  font-size: 0.7rem;
+}
+.sidebar-bottom {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: auto;
+  padding: 1.25rem 0.55rem 0;
+  border-top: 1px solid $line;
+}
+.sidebar-bottom a {
+  color: #b2bac8;
+  font-size: 0.78rem;
+  text-decoration: none;
+}
+.report-date {
+  color: #606b7a;
+  font-size: 0.68rem;
+}
+
+.report-content {
+  min-width: 0;
+  max-width: 980px;
+  padding: 3.1rem clamp(1.4rem, 4vw, 4rem) 4rem;
+}
+.report-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.eyebrow {
+  margin: 0 0 0.55rem;
+  color: $pink;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.report-header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  letter-spacing: -0.05em;
+}
+.report-header h1 span {
+  color: $pink;
+}
+.report-summary {
+  margin-top: 0.7rem;
+  color: $muted;
+  font-size: 0.88rem;
+}
+.report-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid $line;
+  border-radius: 0.4rem;
+  background: transparent;
+  color: #bac1ce;
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.report-action:hover {
+  border-color: $pink;
+  color: $text;
+}
+.section-title-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+.section-title-row h2,
+.score-panel h2,
+.gap-panel h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: -0.03em;
+}
+.section-count {
+  color: $muted;
+  font-size: 0.72rem;
+}
+.question-section {
+  scroll-margin-top: 2rem;
+}
+.question-list {
+  display: grid;
+  gap: 0.75rem;
+}
+.question-card {
+  overflow: hidden;
+  border: 1px solid $line;
+  border-radius: 0.6rem;
+  background: $panel;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+.question-card:hover,
+.question-card.open {
+  border-color: #465165;
+  background: #171e29;
+}
+.question-trigger {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 2.8rem minmax(0, 1fr) 1.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.15rem 1.2rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.question-number {
+  color: $pink;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.question-prompt {
+  color: #eef0f5;
+  font-size: 0.91rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+.question-chevron {
+  color: $muted;
+  font-size: 1.25rem;
+  line-height: 1;
+  transform: translateY(-0.15rem);
+  transition: transform 0.2s ease;
+}
+.question-card.open .question-chevron {
+  color: $pink;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.question-details {
+  padding: 0 1.2rem 1.2rem 4.75rem;
+}
+.question-detail {
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid $line;
+}
+.question-detail + .question-detail {
+  margin-top: 0.8rem;
+}
+.question-detail span {
+  color: #738095;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.question-detail p {
+  margin: 0;
+  color: $muted;
+  font-size: 0.77rem;
+  line-height: 1.55;
+}
+.question-detail.answer p {
+  color: #b6bdca;
+}
+.behavioral-section,
+.roadmap-section {
+  margin-top: 3.3rem;
+}
+.roadmap-list {
+  display: grid;
+  gap: 0.6rem;
+}
+.roadmap-day {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.6rem minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.15rem 1.25rem 1.25rem;
+  border: 1px solid $line;
+  border-radius: 0.6rem;
+  background: $panel;
+}
+.roadmap-day:not(:last-child)::after {
+  position: absolute;
+  bottom: -0.65rem;
+  left: 2.25rem;
+  width: 1px;
+  height: 0.65rem;
+  background: $pink;
+  content: "";
+}
+.roadmap-day:hover {
+  border-color: #465165;
+  transform: translateX(0.15rem);
+}
+.day-marker {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 0.1rem;
+  border-right: 1px solid $line;
+  color: $pink;
+}
+.day-marker span {
+  color: $muted;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+.day-marker strong {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.roadmap-day-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.roadmap-day-heading h3 {
+  margin: 0 0 0.65rem;
+  color: #e6e8ee;
+  font-size: 0.94rem;
+}
+.roadmap-day-heading span {
+  color: $muted;
+  font-size: 0.65rem;
+  white-space: nowrap;
+}
+.roadmap-day ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding-left: 1rem;
+  color: $muted;
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.report-rail {
+  padding: 3.3rem 1.3rem 1.5rem;
+  border-left: 1px solid $line;
+}
+.score-panel {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $line;
+}
+.score-ring {
+  position: relative;
+  display: flex;
+  width: 125px;
+  height: 125px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 1.5rem auto 1rem;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    $pink 0 var(--score),
+    rgba($pink, 0.2) var(--score) 100%
+  );
+}
+.score-ring::before {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: #10151c;
+  content: "";
+}
+.score-ring strong,
+.score-ring span {
+  position: relative;
+  z-index: 1;
+}
+.score-ring strong {
+  font-size: 2.2rem;
+  letter-spacing: -0.06em;
+}
+.score-ring span {
+  margin-top: -0.25rem;
+  color: $muted;
+  font-size: 0.7rem;
+}
+.score-caption {
+  margin: 0;
+  color: $muted;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+.gap-panel {
+  padding-top: 1.5rem;
+}
+.rail-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.rail-heading > span {
+  display: grid;
+  width: 1.4rem;
+  height: 1.4rem;
+  place-items: center;
+  border-radius: 50%;
+  background: $field;
+  color: $muted;
+  font-size: 0.7rem;
+}
+.skill-list {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+.skill-item {
+  display: grid;
+  grid-template-columns: 0.5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.55rem;
+  color: #c4cbd6;
+  font-size: 0.76rem;
+  line-height: 1.35;
+}
+.skill-item small {
+  color: #737e8f;
+  font-size: 0.62rem;
+  text-transform: capitalize;
+}
+.severity-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+}
+.severity-dot.high,
+.severity-key .high {
+  background: $pink;
+}
+.severity-dot.medium,
+.severity-key .medium {
+  background: #e9a23b;
+}
+.severity-dot.low,
+.severity-key .low {
+  background: #55c5a0;
+}
+.severity-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+  color: #6f7989;
+  font-size: 0.59rem;
+}
+.severity-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.severity-key i {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+}
+.rail-note {
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 2rem;
+  padding: 0.8rem;
+  border: 1px solid #46303a;
+  border-radius: 0.45rem;
+  background: rgba($pink, 0.06);
+  color: $muted;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+.rail-note p {
+  margin: 0;
+}
+
+@media (max-width: 1050px) {
+  .interview-page {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+  .report-rail {
+    display: none;
+  }
+}
+@media (max-width: 680px) {
+  .interview-page {
+    display: block;
+  }
+  .interview-sidebar {
+    position: static;
+    height: auto;
+    min-height: auto;
+    padding: 1rem;
+    border-right: 0;
+    border-bottom: 1px solid $line;
+  }
+  .report-brand {
+    margin: 0 0 1rem;
+  }
+  .sidebar-label {
+    display: none;
+  }
+  .report-nav {
+    display: flex;
+    overflow-x: auto;
+  }
+  .report-nav button {
+    width: auto;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .sidebar-bottom {
+    display: none;
+  }
+  .report-content {
+    padding: 2rem 1rem 3rem;
+  }
+  .report-header {
+    display: block;
+    margin-bottom: 2.5rem;
+  }
+  .report-action {
+    margin-top: 1.25rem;
+  }
+  .question-trigger {
+    grid-template-columns: 2rem minmax(0, 1fr) 1.25rem;
+    padding: 1rem;
+  }
+  .question-details {
+    padding: 0 1rem 1rem;
+  }
+  .question-detail {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+  .roadmap-day {
+    grid-template-columns: 3.4rem minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-inline: 0.85rem;
+  }
+  .roadmap-day-heading {
+    display: block;
+  }
+  .roadmap-day-heading span {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+}
