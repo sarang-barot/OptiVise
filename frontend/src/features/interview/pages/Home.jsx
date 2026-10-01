@@ -1,6 +1,23 @@
+import { useState, useRef } from "react";
 import "../style/home.scss";
+import { useInterview } from "../hooks/useInterview";
+import { useNavigate } from "react-router";
 
 const Home = () => {
+  const { loading, generateReport } = useInterview();
+  const [selfDescription, setSelfDescription] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const resumeInputRef = useRef();
+
+  const navigate = useNavigate();
+
+  const handleGenerateReport = async () => {
+    const resumeFile = resumeInputRef.current.files[0];
+
+    const data = await generateReport({ jobDescription, selfDescription, resumeFile });
+    navigate(`/interview/:${data._id}`);
+  };
+
   return (
     <main className="home">
       <div className="home-inner">
@@ -40,6 +57,7 @@ const Home = () => {
             </div>
             <div className="textarea-wrap job-description-wrap">
               <textarea
+                onChange={(e) => {setJobDescription(e.target.value)}}
                 name="jobDescription"
                 id="jobDescription"
                 maxLength="5000"
@@ -101,6 +119,7 @@ const Home = () => {
                 <small>PDF or DOCX (Max 5MB)</small>
               </label>
               <input
+                ref={resumeInputRef}
                 hidden
                 type="file"
                 name="resume"
@@ -116,6 +135,7 @@ const Home = () => {
             <div className="input-group self-description-group">
               <label htmlFor="selfDescription">Quick Self-Description</label>
               <textarea
+                onChange={(e) => {setSelfDescription(e.target.value)}}
                 name="selfDescription"
                 id="selfDescription"
                 placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
@@ -134,7 +154,7 @@ const Home = () => {
 
           <footer className="interview-card-footer">
             <span>AI-Powered Strategy Generation&nbsp; · &nbsp;Approx 30s</span>
-            <button className="button primary-button" type="button">
+            <button onClick={handleGenerateReport} className="button primary-button" type="button">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
