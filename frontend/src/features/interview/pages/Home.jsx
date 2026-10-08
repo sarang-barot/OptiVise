@@ -4,7 +4,7 @@ import { useInterview } from "../hooks/useInterview";
 import { useNavigate } from "react-router";
 
 const Home = () => {
-  const { loading, generateReport } = useInterview();
+  const { loading, generateReport, reports } = useInterview();
   const [selfDescription, setSelfDescription] = useState("");
   const [jobDescription, setJobDescription] = useState("");
   const resumeInputRef = useRef();
@@ -15,8 +15,16 @@ const Home = () => {
     const resumeFile = resumeInputRef.current.files[0];
 
     const data = await generateReport({ jobDescription, selfDescription, resumeFile });
-    navigate(`/interview/:${data._id}`);
+    navigate(`/interview/${data._id}`);
   };
+
+  if (loading) {
+    return (
+      <main className="loading-screen">
+        <h1>Loading you interview plan...</h1>
+      </main>
+    );
+  }
 
   return (
     <main className="home">
@@ -169,6 +177,20 @@ const Home = () => {
           </footer>
         </section>
 
+        {reports.length > 0 && (
+          <section className="recent-reports">
+            <h2>My Recent Interview Plans</h2>
+            <ul className="reports-list">
+              {reports.map(report => (
+                <li key={report._id} className="report-item" onClick={() => navigate(`/interview/${report._id}`)}>
+                  <h3>{report.title || "Untitled Position"}</h3>
+                  <p className="report-meta">Generated on {new Date(report.createdAt).toLocaleDateString()}</p>
+                  <p className={`match-score ${report.matchScore >= 80 ? 'score-high' : report.matchScore >= 60 ? 'score-mid' : 'score-low'}`}>Match Score: {report.matchScore}%</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
         <nav className="home-footer" aria-label="Footer navigation">
           <a href="#privacy">Privacy Policy</a>
           <a href="#terms">Terms of Service</a>

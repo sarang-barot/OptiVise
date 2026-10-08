@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http:localhost:3000",
+    baseURL: "http://localhost:3000",
     withCredentials: true,
 });
 
@@ -26,7 +26,7 @@ export const generateInterviewReport = async ({ jobDescription, selfDescription,
 /**
  * @description Service to get interview report by id
  */
-export const getInterviewReportById = async ({ interviewId }) => {
+export const getInterviewReportById = async (interviewId) => {
     const response = await api.get(`/api/interview/report/${interviewId}`);
     return response.data;
 };
