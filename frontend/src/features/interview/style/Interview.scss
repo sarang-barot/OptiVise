@@ -92,6 +92,16 @@ $text: #f3f4f7;
   border-left: 2px solid $pink;
   color: $text;
 }
+.interview-sidebar > .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: 0.75rem;
+  padding-inline: 0.5rem;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
 .interview-icon {
   display: inline-flex;
   width: 1.3rem;
@@ -109,7 +119,7 @@ $text: #f3f4f7;
 .sidebar-bottom {
   display: grid;
   gap: 0.65rem;
-  margin-top: auto;
+  margin-top: 0;
   padding: 1.25rem 0.55rem 0;
   border-top: 1px solid $line;
 }
