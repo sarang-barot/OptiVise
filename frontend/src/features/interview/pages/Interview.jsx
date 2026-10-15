@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../style/Interview.scss";
 import { useInterview } from "../hooks/useInterview";
 import { useParams } from "react-router";
@@ -63,6 +63,12 @@ const Interview = () => {
   const [activeSection, setActiveSection] = useState("technical");
   const { report, loading, getResumePdf } = useInterview();
   const { interviewId } = useParams();
+
+  useEffect(() => {
+    document.title = report
+      ? "Interview Plan | OptiVise"
+      : "Preparing Interview Plan | OptiVise";
+  }, [report]);
 
   if (loading || !report) {
     return (

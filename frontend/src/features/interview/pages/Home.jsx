@@ -1,9 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import "../style/home.scss";
 import { useInterview } from "../hooks/useInterview";
 import { useNavigate } from "react-router";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Home | OptiVise";
+  }, []);
   const { loading, generateReport, reports } = useInterview();
   const [selfDescription, setSelfDescription] = useState("");
   const [jobDescription, setJobDescription] = useState("");

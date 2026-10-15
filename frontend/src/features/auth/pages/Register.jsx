@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../hooks/useAuth';
 
 const Register = () => {
+  useEffect(() => {
+    document.title = 'Register | OptiVise';
+  }, []);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
