@@ -10,14 +10,50 @@ const Home = () => {
   const { loading, generateReport, reports } = useInterview();
   const [selfDescription, setSelfDescription] = useState("");
   const [jobDescription, setJobDescription] = useState("");
+  const [errors, setErrors] = useState({});
   const resumeInputRef = useRef();
 
   const navigate = useNavigate();
 
-  const handleGenerateReport = async () => {
-    const resumeFile = resumeInputRef.current.files[0];
+  const validateForm = () => {
+    const nextErrors = {};
+    const trimmedJobDescription = jobDescription.trim();
+    const trimmedSelfDescription = selfDescription.trim();
+    const resumeFile = resumeInputRef.current?.files?.[0];
 
-    const data = await generateReport({ jobDescription, selfDescription, resumeFile });
+    if (!trimmedJobDescription) {
+      nextErrors.jobDescription = "Please enter the target job description.";
+    }
+
+    if (!resumeFile && !trimmedSelfDescription) {
+      nextErrors.selfDescription = "Please upload a resume or provide a self-description.";
+    }
+
+    if (resumeFile) {
+      const isPdf = resumeFile.type === "application/pdf" || resumeFile.name.toLowerCase().endsWith(".pdf");
+      const isDocx = resumeFile.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || resumeFile.name.toLowerCase().endsWith(".docx");
+
+      if (!isPdf && !isDocx) {
+        nextErrors.resume = "Only PDF or DOCX files are allowed.";
+      }
+
+      if (resumeFile.size > 5 * 1024 * 1024) {
+        nextErrors.resume = "Resume must be smaller than 5MB.";
+      }
+    }
+
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const handleGenerateReport = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    const resumeFile = resumeInputRef.current?.files?.[0];
+
+    const data = await generateReport({ jobDescription: jobDescription.trim(), selfDescription: selfDescription.trim(), resumeFile });
     navigate(`/interview/${data._id}`);
   };
 
@@ -68,14 +104,21 @@ const Home = () => {
             </div>
             <div className="textarea-wrap job-description-wrap">
               <textarea
-                onChange={(e) => {setJobDescription(e.target.value)}}
+                aria-invalid={Boolean(errors.jobDescription)}
+                onChange={(e) => {
+                  setJobDescription(e.target.value);
+                  if (errors.jobDescription) setErrors((prev) => ({ ...prev, jobDescription: '' }));
+                }}
                 name="jobDescription"
                 id="jobDescription"
                 maxLength="5000"
+                value={jobDescription}
                 placeholder={
                   "Paste the full job description here...\ne.g. 'Senior Frontend Engineer at Google requires\nproficiency in React, TypeScript, and large-scale system\ndesign..."
                 }
+                required
               ></textarea>
+              {errors.jobDescription && <small style={{ color: '#ff6b6b', display: 'block', marginTop: '0.35rem' }}>{errors.jobDescription}</small>}
               <span className="character-count">0 / 5000 chars</span>
             </div>
           </div>
@@ -136,7 +179,11 @@ const Home = () => {
                 name="resume"
                 id="resume"
                 accept=".pdf,.docx"
+                onChange={() => {
+                  if (errors.resume) setErrors((prev) => ({ ...prev, resume: '' }));
+                }}
               />
+              {errors.resume && <small style={{ color: '#ff6b6b', display: 'block', marginTop: '0.35rem' }}>{errors.resume}</small>}
             </div>
 
             <div className="or-divider">
@@ -146,11 +193,17 @@ const Home = () => {
             <div className="input-group self-description-group">
               <label htmlFor="selfDescription">Quick Self-Description</label>
               <textarea
-                onChange={(e) => {setSelfDescription(e.target.value)}}
+                aria-invalid={Boolean(errors.selfDescription)}
+                onChange={(e) => {
+                  setSelfDescription(e.target.value);
+                  if (errors.selfDescription) setErrors((prev) => ({ ...prev, selfDescription: '' }));
+                }}
                 name="selfDescription"
                 id="selfDescription"
+                value={selfDescription}
                 placeholder="Briefly describe your experience, key skills, and years of experience if you don't have a resume handy..."
               ></textarea>
+              {errors.selfDescription && <small style={{ color: '#ff6b6b', display: 'block', marginTop: '0.35rem' }}>{errors.selfDescription}</small>}
             </div>
 
             <div className="helper-message">
